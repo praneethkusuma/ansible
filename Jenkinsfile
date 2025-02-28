@@ -10,6 +10,13 @@ pipeline {
       string(name: 'EXTENSIONS_BRANCH', defaultValue: 'master', description: 'Extensions Branch to deploy')
           }
   stages{
+    stage('Begin Notifier') {
+        steps {
+            script {
+                echo "S3 file deployment started "
+            }
+        }
+    }
     stage('Ansible Run') {
       steps {
         script {
