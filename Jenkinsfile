@@ -14,11 +14,11 @@ pipeline {
       steps {
         script {
           if(env.wild1 == "true" ){
-            sh "cd ${WORKSPACE}/${ENVIRONMENT} && ansible-playbook playbook.yml  -i inventory  --extra-vars 'host_group=wild1 code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'"
+            sh "ansible-playbook playbook.yml  -i inventory  --extra-vars 'host_group=wild1 code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'"
           }
            else {
                if(env.wild2 == 'true'){
-                sh "cd ${WORKSPACE}/${ENVIRONMENT} && ansible-playbook playbook.yml  -i inventory  --extra-vars 'host_group=wild2 code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'"
+                sh "ansible-playbook playbook.yml  -i inventory  --extra-vars 'host_group=wild2 code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'"
                }
            }   
         }
