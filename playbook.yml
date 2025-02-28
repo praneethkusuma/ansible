@@ -1,4 +1,4 @@
-- hosts: "{{ host_group }}"
+- hosts: all
   become: true
   vars:
     php_application_repo_url: "https://github.com/praneethkusuma/S3.git"
