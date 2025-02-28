@@ -13,7 +13,7 @@ pipeline {
     stage('Begin Notifier') {
         steps {
             script {
-                echo "S3 file deployment started "
+                echo "Ansible started "
             }
         }
     }
