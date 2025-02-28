@@ -1,8 +1,8 @@
 - hosts: "{{ host_group }}"
   become: true
   vars:
-    php_application_repo_url: "git@github.com:praneethkusuma/S3.git"
-    extensions_repo_url: "git@github.com:praneethkusuma/fundtransfer.git"
+    php_application_repo_url: "https://github.com/praneethkusuma/S3.git"
+    extensions_repo_url: "https://github.com:praneethkusuma/fundtransfer.git"
     # live_branch: "main"  
     # extensions_branch: "master"
     # destination_dir: "~/live"

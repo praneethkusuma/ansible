@@ -2,9 +2,6 @@ pipeline {
   agent {
       label "built-in"
   }
-  options {
-    ansiColor('xterm')
-  }
   environment {
     ENVIRONMENT = "Prod"
   }
