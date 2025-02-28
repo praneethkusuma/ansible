@@ -1,0 +1,79 @@
+- hosts: all
+  become: true
+  vars:
+    php_application_repo_url: "git@gitlab.mgmt.darwinbox.io:Engineering/Microservices/main-application.git"
+    extensions_repo_url: "git@gitlab.mgmt.darwinbox.io:Engineering/Microservices/main-application-extensions.git"
+    rnr_repo_url: "git@gitlab.mgmt.darwinbox.io:Engineering/Microservices/main-application-rnr.git"
+    onboarding_repo_url: "git@gitlab.mgmt.darwinbox.io:Engineering/Microservices/main-application-onboarding.git"
+    studio_repo_url: "git@gitlab.mgmt.darwinbox.io:Engineering/Microservices/main-application-studio.git"
+    templates_repo_url: "git@gitlab.mgmt.darwinbox.io:Engineering/Microservices/main-application-templates.git"
+    yii_repo_url: "git@gitlab.mgmt.darwinbox.io:Engineering/yii.git"
+    sso_repo_url: "git@gitlab.mgmt.darwinbox.io:Engineering/ssov2.git"
+    code_branch: "main"  
+    extensions_branch: "master"
+
+  tasks:
+    - name: Pull latest changes for the live repo
+      git:
+        repo: "{{ php_application_repo_url }}"
+        dest: /data/live
+        version: "{{ code_branch }}"
+        update: yes
+      become: true
+      become_user: dboxnormal
+    - name: Pull latest changes for the extensions repo
+      git:
+        repo: "{{ extensions_repo_url }}"
+        dest: /data/extensions
+        version: "{{ extensions_branch }}"
+        update: yes
+      become: true
+      become_user: dboxnormal
+    - name: Pull latest changes for the rnr repo
+      git:
+        repo: "{{ rnr_repo_url }}"
+        dest: /data/rnr
+        version: "{{ rnr_branch }}"
+        update: yes
+      become: true
+      become_user: dboxnormal
+    - name: Pull latest changes for the onboarding repo
+      git:
+        repo: "{{ onboarding_repo_url }}"
+        dest: /data/onboarding
+        version: "{{ onboarding_branch }}"
+        update: yes
+      become: true
+      become_user: dboxnormal
+    - name: Pull latest changes for the studio repo
+      git:
+        repo: "{{ studio_repo_url }}"
+        dest: /data/studio
+        version: "{{ studio_branch }}"
+        update: yes
+      become: true
+      become_user: dboxnormal
+    - name: Pull latest changes for the templates repo
+      git:
+        repo: "{{ templates_repo_url }}"
+        dest:  /data/templates
+        version: "{{ template_branch }}"
+        update: yes
+      become: true
+      become_user: dboxnormal
+    - name: Pull latest changes for the yii repo
+      git:
+        repo: "{{ yii_repo_url }}"
+        dest:  /data/yii
+        version: "{{ yii_branch }}"
+        update: yes
+      become: true
+      become_user: dboxnormal
+    - name: Pull latest changes for the sso repo
+      git:
+        repo: "{{ sso_repo_url }}"
+        dest:  /data/sso
+        version: "{{ sso_branch }}"
+        update: yes
+      become: true
+      become_user: dboxnormal

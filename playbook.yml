@@ -1,0 +1,26 @@
+- hosts: "{{ host_group }}"
+  become: true
+  vars:
+    php_application_repo_url: "git@github.com:praneethkusuma/S3.git"
+    extensions_repo_url: "git@github.com:praneethkusuma/fundtransfer.git"
+    # live_branch: "main"  
+    # extensions_branch: "master"
+    # destination_dir: "~/live"
+
+  tasks:
+    - name: Pull latest changes for the live repo
+      git:
+        repo: "{{ php_application_repo_url }}"
+        dest: ~/live
+        version: "{{ code_branch }}"
+        update: yes
+      become: true
+      become_user: ubuntu
+    - name: Pull latest changes for the extensions repo
+      git:
+        repo: "{{ extensions_repo_url }}"
+        dest: ~/extensions
+        version: "{{ extensions_branch }}"
+        update: yes
+      become: true
+      become_user: ubuntu

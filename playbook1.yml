@@ -1,0 +1,49 @@
+- hosts: all
+  become: true
+  vars:
+    php_application_repo_url: "git@github.com:praneethkusuma/S3.git"
+    code_branch: "main"  # Change this to the branch you want to checkout
+    destination_dir: "~/live"
+
+  tasks:
+    - name: Ensure Git is installed
+      package:
+        name: git
+        state: present
+      become: true
+
+    - name: Fetch latest updates from origin for branch {{ code_branch }}
+      command: git fetch origin "{{ code_branch }}"
+      args:
+        chdir: "{{ destination_dir }}"
+      register: git_fetch_output  # Capture the output of git fetch
+      become: true
+      become_user: ubuntu
+
+    - name: Display Git Fetch Output
+      debug:
+        var: git_fetch_output.stdout_lines  # Print output line by line
+
+    - name: Checkout the required branch {{ code_branch }}
+      command: git checkout "{{ code_branch }}"
+      args:
+        chdir: "{{ destination_dir }}"
+      register: git_checkout_output  # Capture the output of git checkout
+      become: true
+      become_user: ubuntu
+
+    - name: Display Git Checkout Output
+      debug:
+        var: git_checkout_output.stdout_lines  # Print output line by line
+
+    - name: Pull the latest changes from origin/{{ code_branch }}
+      command: git pull origin "{{ code_branch }}"
+      args:
+        chdir: "{{ destination_dir }}"
+      register: git_pull_output  # Capture the output of git pull
+      become: true
+      become_user: ubuntu
+
+    - name: Display Git Pull Output
+      debug:
+        var: git_pull_output.stdout_lines  # Print output line by line

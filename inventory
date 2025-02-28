@@ -1,0 +1,12 @@
+[all:vars]
+ansible_connection="ssh"
+ansible_user="ubuntu"
+ansible_python_interpreter="/usr/bin/python3"
+ansible_ssh_common_args="-o StrictHostKeyChecking=no"
+ansible_ssh_private_key_file="ansible"
+
+[wild1]
+13.212.7.236
+
+[wild2]
+18.136.210.180
