@@ -5,6 +5,10 @@ pipeline {
   environment {
         ENVIRONMENT = "Prod"
   }
+  parameters {
+        string(name: 'CODE_BRANCH', defaultValue: 'main', description: 'Code Branch to deploy')
+        string(name: 'EXTENSIONS_BRANCH', defaultValue: 'master', description: 'Extensions Branch to deploy')
+            }
   stages{
         stage('Begin Notifier') {
             steps {
@@ -18,13 +22,11 @@ pipeline {
                 script {
                 def environments = ['wild1', 'wild2']
                 def selectedEnvironments = environments.findAll { envName -> env."${envName}" == "true" }
-                if (selectedEnvironments.isEmpty()) {
-                    echo "No environments selected. Exiting the pipeline."
-                    return
-                    }
+                if (selectedEnvironments) {
                     sh """
                         ansible-playbook playbook.yml -i inventory --extra-vars 'host_group=${selectedEnvironments.join(",")} code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'
                     """
+                   }
                 }
             }
         }
