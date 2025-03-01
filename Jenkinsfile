@@ -13,7 +13,14 @@ pipeline {
     stage('Begin Notifier') {
         steps {
             script {
-                echo "Ansible started "
+                echo "Ansible play "
+            }
+        }
+    }
+    stage('Ansible going to start') {
+        steps {
+            script {
+                echo "Ansible starts "
             }
         }
     }
