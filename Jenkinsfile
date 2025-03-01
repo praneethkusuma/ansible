@@ -18,11 +18,13 @@ pipeline {
                 script {
                 def environments = ['wild1', 'wild2']
                 def selectedEnvironments = environments.findAll { envName -> env."${envName}" == "true" }
-                if (selectedEnvironments) {
+                if (selectedEnvironments.isEmpty()) {
+                    echo "No environments selected. Exiting the pipeline."
+                    return
+                    }
                     sh """
                         ansible-playbook playbook.yml -i inventory --extra-vars 'host_group=${selectedEnvironments.join(",")} code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'
                     """
-                   }
                 }
             }
         }
