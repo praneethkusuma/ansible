@@ -5,10 +5,6 @@ pipeline {
   environment {
         ENVIRONMENT = "Prod"
   }
-  parameters {
-        string(name: 'CODE_BRANCH', defaultValue: 'main', description: 'Code Branch to deploy')
-        string(name: 'EXTENSIONS_BRANCH', defaultValue: 'master', description: 'Extensions Branch to deploy')
-            }
   stages{
         stage('Begin Notifier') {
             steps {
