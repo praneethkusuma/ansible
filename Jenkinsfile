@@ -21,12 +21,12 @@ pipeline {
             steps {
                 script {
                 def environments = ['wild1', 'wild2']
-                def selectedEnvironments = environments.findAll { envName -> env."${envName}" == "true" }
-                if (selectedEnvironments) {
-                    sh """
-                        ansible-playbook playbook.yml -i inventory --extra-vars 'host_group=${selectedEnvironments.join(",")} code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'
-                    """
-                   }
+                 environments.each { envName ->
+                   if (env."${envName}" == "true") {
+                         sh """
+                             ansible-playbook playbook.yml -i ${envName}/inventory --extra-vars 'code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'
+                         """
+                     }
                 }
             }
         }
