@@ -27,6 +27,7 @@ pipeline {
                              ansible-playbook playbook.yml -i ${envName}/inventory --extra-vars 'code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'
                          """
                      }
+                   }
                 }
             }
         }
