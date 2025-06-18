@@ -24,7 +24,7 @@ pipeline {
                  environments.each { envName ->
                    if (env."${envName}" == "true") {
                          sh """
-                             ansible-playbook playbook.yml -i ${envName}/inventory --extra-vars 'code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'
+                             ansible-playbook ${WORKSPACE}/playbook.yml -i ${envName}/inventory --extra-vars 'code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'
                          """
                      }
                    }
