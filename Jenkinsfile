@@ -24,7 +24,7 @@ pipeline {
                  environments.each { tenant ->
                    if (env."${tenant}" == "true") {
                          sh """
-                             ansible-playbook ${WORKSPACE}/playbook.yml -i inventory --extra-vars 'host_group=${tenant} code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'
+                             ansible-playbook ${WORKSPACE}/playbook.yml -i inventory -v --extra-vars 'host_group=${tenant} code_branch=${CODE_BRANCH} extensions_branch=${EXTENSIONS_BRANCH}'
                          """
                      }
                    }
